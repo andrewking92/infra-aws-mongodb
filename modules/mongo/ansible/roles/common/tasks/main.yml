@@ -1,0 +1,9 @@
+---
+- name: Setup
+  import_tasks: setup.yml
+- name: Install Mongo Shell
+  import_tasks: install-mongosh.yml
+- name: Install Java
+  import_tasks: install-java.yml
+- name: Install Git
+  import_tasks: install-git.yml

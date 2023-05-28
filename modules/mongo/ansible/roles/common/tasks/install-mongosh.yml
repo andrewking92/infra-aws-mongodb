@@ -1,0 +1,15 @@
+---
+- name: "Copy MongoDB Repository File"
+  copy:
+    src: "../files/{{mongodb_repo}}"
+    dest: "/etc/yum.repos.d/{{mongodb_repo}}"
+    owner: root
+    group: root
+    mode: "u=rw,g=r,o=r"
+  become: true
+
+- name: "Install MongoDB"
+  yum: 
+    name: mongodb-enterprise
+    state: latest
+  become: true
