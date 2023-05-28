@@ -16,11 +16,15 @@
 
 - name: "Create dbpath for Application Database"
   file:
-    path: /data/appdb
     state: directory
+    path: "{{ item }}"
     owner: mongod
     group: mongod
     mode: 0775
+  loop:
+    - /data/db
+    - /data/log
+    - /data/audit
 
 - name: Generate keyfile
   command: "{{ 'openssl rand -base64 756' }}"
@@ -37,7 +41,7 @@
 
 - name: "Copy mongod configuration file"
   copy:
-    src: "../files/mongod.conf"
+    src: "../files/mongod-basic.conf"
     dest: "/etc/mongod.conf"
     owner: root
     group: root
@@ -50,8 +54,3 @@
     state: started
     enabled: yes
   become: true
-
-# - name: Execute mongo.sh shell script from local directory
-#   script: "../files/mongo.sh"
-#   args:
-#     executable: /bin/bash
