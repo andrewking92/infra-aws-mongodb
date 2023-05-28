@@ -16,4 +16,4 @@
   lineinfile:
     dest: /etc/environment
     state: present
-    line: "JAVA_HOME=/usr/lib/jvm/java-17-openjdk-17.0.6.0.10-3.el8_7.x86_64"
+    line: "JAVA_HOME=/etc/alternatives/java_sdk"
