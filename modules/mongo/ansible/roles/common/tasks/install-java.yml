@@ -5,6 +5,12 @@
     name: java-17-openjdk
     state: present
 
+- name: Install Java 11 OpenJDK
+  become: true
+  package:
+    name: java-11-openjdk
+    state: present
+
 - name: Install Apache Maven
   become: true
   package:
@@ -16,4 +22,8 @@
   lineinfile:
     dest: /etc/environment
     state: present
-    line: "JAVA_HOME=/etc/alternatives/java_sdk"
+    line: "JAVA_HOME=/usr/lib/jvm/java-11-openjdk-11.0.19.0.7-4.el8.x86_64"
+
+- name: Set Java 11 as default
+  become: true
+  shell: update-alternatives --set java /usr/lib/jvm/java-11-openjdk-11.0.19.0.7-4.el8.x86_64/bin/java
